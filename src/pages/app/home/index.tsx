@@ -19,6 +19,8 @@ import {
 	CardTitle,
 } from '@/src/components/ui/card'
 import { toast } from 'sonner'
+import { Helmet } from 'react-helmet-async'
+import { env } from '@/src/env'
 
 const homeSchema = z.object({
 	key: z.string().nonempty('O campo [key] não pode ser vazio'),
@@ -91,81 +93,88 @@ export function Home() {
 	return isLoading ? (
 		<Loading />
 	) : (
-		<main className="min-h-screen flex items-center justify-center">
-			<Card className="min-w-96">
-				<CardHeader>
-					<CardTitle className="text-2xl">Conecte seu Trello</CardTitle>
-				</CardHeader>
+		<>
+			<Helmet>
+				<title>{env.VITE_TITLE} | Home</title>
+				<meta name="description" content={env.VITE_DESC} />
+			</Helmet>
 
-				<form onSubmit={handleSubmit(handleFormSubmit)}>
-					<CardContent>
-						<div className="space-y-4 mb-4">
-							<div className="flex flex-col gap-2">
-								<Label className="font-semibold text-sm" htmlFor="key">
-									Personal Key
-								</Label>
-								<Input
-									data-error={errors.key?.message}
-									type="text"
-									id="key"
-									{...register('key')}
-								/>
-								<a
-									className="text-sm text-blue-600 hover:text-blue-400 self-start"
-									target="_blank"
-									href="https://trello.com/app-key#:~:text=bf9a49e6c3c4a79d154be59361caf26f"
-									rel="noreferrer"
-								>
-									Onde encontrar minha Key?
-								</a>
+			<main className="min-h-screen flex items-center justify-center">
+				<Card className="min-w-96">
+					<CardHeader>
+						<CardTitle className="text-2xl">Conecte seu Trello</CardTitle>
+					</CardHeader>
+
+					<form onSubmit={handleSubmit(handleFormSubmit)}>
+						<CardContent>
+							<div className="space-y-4 mb-4">
+								<div className="flex flex-col gap-2">
+									<Label className="font-semibold text-sm" htmlFor="key">
+										Personal Key
+									</Label>
+									<Input
+										data-error={errors.key?.message}
+										type="text"
+										id="key"
+										{...register('key')}
+									/>
+									<a
+										className="text-sm text-blue-600 hover:text-blue-400 self-start"
+										target="_blank"
+										href="https://trello.com/app-key#:~:text=bf9a49e6c3c4a79d154be59361caf26f"
+										rel="noreferrer"
+									>
+										Onde encontrar minha Key?
+									</a>
+								</div>
+
+								<div className="flex flex-col gap-2">
+									<Label className="font-semibold text-sm" htmlFor="token">
+										Token
+									</Label>
+									<Input
+										data-error={errors.token?.message}
+										className="border px-4 py-2 rounded border-solid border-zinc-300 outline-none focus:border-zinc-500 transition-all data-[error]:border-red-500"
+										type="text"
+										id="token"
+										{...register('token')}
+									/>
+									<a
+										className="text-sm text-blue-600 hover:text-blue-400 self-start"
+										target="_blank"
+										href="https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Server%20Token&key=bf9a49e6c3c4a79d154be59361caf26f"
+										rel="noreferrer"
+									>
+										Onde encontrar meu Token?
+									</a>
+								</div>
 							</div>
-
-							<div className="flex flex-col gap-2">
-								<Label className="font-semibold text-sm" htmlFor="token">
-									Token
-								</Label>
-								<Input
-									data-error={errors.token?.message}
-									className="border px-4 py-2 rounded border-solid border-zinc-300 outline-none focus:border-zinc-500 transition-all data-[error]:border-red-500"
-									type="text"
-									id="token"
-									{...register('token')}
-								/>
-								<a
-									className="text-sm text-blue-600 hover:text-blue-400 self-start"
-									target="_blank"
-									href="https://trello.com/1/authorize?expiration=never&scope=read,write,account&response_type=token&name=Server%20Token&key=bf9a49e6c3c4a79d154be59361caf26f"
-									rel="noreferrer"
+						</CardContent>
+						<CardFooter>
+							<div className="flex flex-col gap-2 w-full">
+								<Button
+									className="cursor-pointer"
+									variant="outline"
+									type="submit"
+									disabled={isSubmitting}
 								>
-									Onde encontrar meu Token?
-								</a>
-							</div>
-						</div>
-					</CardContent>
-					<CardFooter>
-						<div className="flex flex-col gap-2 w-full">
-							<Button
-								className="cursor-pointer"
-								variant="outline"
-								type="submit"
-								disabled={isSubmitting}
-							>
-								Salvar Alterações
-							</Button>
+									Salvar Alterações
+								</Button>
 
-							<Button
-								className="cursor-pointer"
-								variant="default"
-								type="button"
-								disabled={editTrelloConfigPending}
-								onClick={handleSetTrelloTemplate}
-							>
-								Criar Template
-							</Button>
-						</div>
-					</CardFooter>
-				</form>
-			</Card>
-		</main>
+								<Button
+									className="cursor-pointer"
+									variant="default"
+									type="button"
+									disabled={editTrelloConfigPending}
+									onClick={handleSetTrelloTemplate}
+								>
+									Criar Template
+								</Button>
+							</div>
+						</CardFooter>
+					</form>
+				</Card>
+			</main>
+		</>
 	)
 }

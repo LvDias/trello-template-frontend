@@ -14,6 +14,8 @@ import {
 	CardTitle,
 } from '@/src/components/ui/card'
 import { toast } from 'sonner'
+import { Helmet } from 'react-helmet-async'
+import { env } from '@/src/env'
 
 const signInSchema = z.object({
 	email: z.string().email(),
@@ -53,38 +55,45 @@ export function SignIn() {
 	}
 
 	return (
-		<main className="min-h-screen flex items-center justify-center">
-			<Card className="min-w-96">
-				<CardHeader>
-					<CardTitle className="text-2xl">Acesse sua conta</CardTitle>
-				</CardHeader>
-				<form onSubmit={handleSubmit(handleSubmitForm)}>
-					<CardContent>
-						<div className="flex flex-col gap-2 mb-4">
-							<Label htmlFor="email">E-mail</Label>
-							<Input
-								data-error={errors.email}
-								type="email"
-								id="email"
-								{...register('email')}
-							/>
-							<p className="text-sm text-zinc-400">
-								Você receberá um link por e-mail para acessar sua conta.
-							</p>
-						</div>
-					</CardContent>
-					<CardFooter>
-						<Button
-							className="w-full cursor-pointer"
-							variant="default"
-							type="submit"
-							disabled={isSubmitting}
-						>
-							Enviar Link de Acesso
-						</Button>
-					</CardFooter>
-				</form>
-			</Card>
-		</main>
+		<>
+			<Helmet>
+				<title>{env.VITE_TITLE} | Login</title>
+				<meta name="description" content={env.VITE_DESC} />
+			</Helmet>
+
+			<main className="min-h-screen flex items-center justify-center">
+				<Card className="min-w-96">
+					<CardHeader>
+						<CardTitle className="text-2xl">Acesse sua conta</CardTitle>
+					</CardHeader>
+					<form onSubmit={handleSubmit(handleSubmitForm)}>
+						<CardContent>
+							<div className="flex flex-col gap-2 mb-4">
+								<Label htmlFor="email">E-mail</Label>
+								<Input
+									data-error={errors.email}
+									type="email"
+									id="email"
+									{...register('email')}
+								/>
+								<p className="text-sm text-zinc-400">
+									Você receberá um link por e-mail para acessar sua conta.
+								</p>
+							</div>
+						</CardContent>
+						<CardFooter>
+							<Button
+								className="w-full cursor-pointer"
+								variant="default"
+								type="submit"
+								disabled={isSubmitting}
+							>
+								Enviar Link de Acesso
+							</Button>
+						</CardFooter>
+					</form>
+				</Card>
+			</main>
+		</>
 	)
 }
