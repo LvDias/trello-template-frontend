@@ -39,9 +39,7 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 
 Node.js (versão 18 ou superior recomendada)
 
-npm ou Yarn
-
-(Seu banco de dados, ex: Docker para PostgreSQL, MongoDB Compass, etc.)
+pnpm instalado
 
 1. Clonar o Repositório
 ```
