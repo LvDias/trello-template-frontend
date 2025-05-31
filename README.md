@@ -1,54 +1,77 @@
-# React + TypeScript + Vite
+## TRELLO TEMPLATE [FRONTEND]
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bem-vindo ao projeto! Esta aplicação web oferece um sistema de autenticação seguro e uma ferramenta intuitiva para gerenciar e automatizar a criação de templates no Trello, utilizando dados de compras da plataforma Cakto para autenticação de usuários.
 
-Currently, two official plugins are available:
+### 🚀 Tecnologias Utilizadas
+Este projeto foi construído utilizando as seguintes tecnologias e ferramentas:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React.js: Biblioteca JavaScript para construção de interfaces de usuário dinâmicas e reativas.
 
-## Expanding the ESLint configuration
+- HTML/CSS: Estrutura e estilização da aplicação.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- JavaScript (ES6+): Linguagem de programação principal do frontend.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### ✨ Funcionalidades
+
+#### Autenticação Segura:
+
+Tela de login com validação de e-mail.
+
+Se o e-mail não estiver associado a uma compra na plataforma Cakto, um erro será exibido.
+
+Em caso de e-mail válido, um link de autenticação único é enviado diretamente para o usuário.
+
+#### Integração Trello:
+
+Configuração de Key e Token: Inputs dedicados para o usuário inserir sua Trello Key e Token.
+
+Links de Ajuda: Facilidade para o usuário encontrar sua Key e Token do Trello.
+
+Salvar Alterações: Botão para persistir as configurações da Trello Key e Token.
+
+Criação Automática de Template: Botão para gerar um template de Trello de forma automática, agilizando fluxos de trabalho.
+
+#### ⚙️ Como Configurar e Rodar o Projeto
+Siga os passos abaixo para configurar e rodar o projeto em sua máquina local.
+
+#### Pré-requisitos
+Certifique-se de ter as seguintes ferramentas instaladas:
+
+Node.js (versão 18 ou superior recomendada)
+
+npm ou Yarn
+
+(Seu banco de dados, ex: Docker para PostgreSQL, MongoDB Compass, etc.)
+
+1. Clonar o Repositório
+```
+git clone https://github.com/LvDias/trello-template-frontend
+cd trello-template-frontend
+```
+3. Configurar o Frontend
+```
+pnpm install
+```
+Crie um arquivo .env na raiz da pasta do backend com as seguintes variáveis de ambiente:
+```
+VITE_TITLE="" // TITULO DO SITE
+VITE_DESC="" // DESCRIÇÃO DO SITE
+VITE_API_URL="http://localhost:3333" // DOMINIO UTILIZADO NO BACKEND
+VITE_ENABLE_API_DELAY=false // UTILIZADO SOMENTE NO MODO DEV
+```
+Substitua os valores pelos dados de sua configuração.
+
+Rodar a aplicação
+```
+pnpm dev # Para modo desenvolvimento
+# ou
+pnpm start # Para modo produção
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🤝 Contribuição
+Contribuições são sempre bem-vindas! Se você tiver sugestões, encontrou um bug ou quer adicionar uma nova funcionalidade, sinta-se à vontade para abrir uma issue ou enviar um pull request.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+📞 Contato
+Se você tiver alguma dúvida, entre em contato:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Luan Dias: [LinkedIn](https://www.linkedin.com/in/luan-dias-5a63091a2/)
